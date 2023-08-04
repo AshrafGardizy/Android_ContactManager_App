@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="userViewModel"
+            type="com.example.contactmanagerapp.viewModel.UsersViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
+        tools:context=".MainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintUp"
+            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:text="@={userViewModel.inputName}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="90dp"
+                android:layout_marginBottom="12dp"
+                android:hint="Enter your name"
+                app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+                app:layout_constraintEnd_toStartOf="@+id/buttonSave"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:text="@={userViewModel.inputEmail}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="90dp"
+                android:hint="Enter your email"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/editTextName"
+                app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:onClick="@{()->userViewModel.saveOrUpdate()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="57dp"
+                android:text="@={userViewModel.saveOrUpdateButtonText}"
+                app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editTextName"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:onClick="@{()->userViewModel.clearAllOrDelete()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:layout_marginBottom="1dp"
+                android:text="@={userViewModel.clearAllOrDeleteButtonText}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editTextEmail"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSave" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintUp"
+            app:layout_constraintVertical_bias="0.527" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
